@@ -1,13 +1,13 @@
 # Tradingview-S50
 Data of SET50 index future for importing to Amibroker.
 
-### Info
+## Info
 Price, time, volume of each series in 1 minute timeframe concatenated together. Data in last trading day of each series will be replaced with data from the next series. For example, at the date 2021-12-29 (which is the LTD of S50Z2021) will be replaced with data from S50H2022 instead.
-
-### How to Use
+  
+## How to Use
 Just download the .zip file from the release. Extract it to retrieve the .csv file before importing it into Amibroker.
 
-### Price Error
+## Price Error
 1. Certain row might have bar at time 12:30, but actually it must be counted in the previous bar at 12:29.
 2. The data from intraday might have price error, too high or too low, or lack of some bar. So I tried to correct it manually as below which migh be inaccurate from reality.
 
