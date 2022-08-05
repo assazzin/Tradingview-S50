@@ -2,11 +2,14 @@
 Data of SET50 index future for importing to Amibroker.
 
 ### Info
-ข้อมูลราย series นำมาต่อกัน โดยใน last trading day ของแต่ละ series จะใช้ข้อมูลของ series ถัดไปแทน เช่น วันที่ 2021-12-29 (ซึ่งเป็น last trading day ของ S50Z2021) จะใช้ข้อมูลของ series S50H2022 แทน
+Price, time, volume of each series in 1 minute timeframe concatenated together. Data in last trading day of each series will be replaced with data from the next series. For example, at the date 2021-12-29 (which is the LTD of S50Z2021) will be replaced with data from S50H2022 instead.
+
+### How to Use
+Just download the .zip file from the release. Extract it to retrieve the .csv file before importing it into Amibroker.
 
 ### Price Error
-1. ในบาง row จะมีข้อมูลของเวลา 12:30 ด้วย จริง ๆ จะต้องนำไปรวมกับแท่ง 12:29
-2. ข้อมูลที่ต่ำกว่า day มักมีปัญหาข้อมูลย้อนหลังไม่เพียงพอ หรือ high, low สูงหรือต่ำเกินความเป็นจริง เลยได้แก้ไขข้อมูลให้ใกล้เคียงความเป็นจริง (ข้อมูลที่แก้ไขไป เกิดจากการกะคร่าว ๆ ไม่ได้ไป cross check จากแหล่งอื่น)
+1. Certain row might have bar at time 12:30, but actually it must be counted in the previous bar at 12:29.
+2. The data from intraday might have price error, too high or too low, or lack of some bar. So I tried to correct it manually as below which migh be inaccurate from reality.
 
 **S50U2017**  
 2017-09-25T11:49:00+07:00  High 1160 -> 1064.1  
@@ -26,9 +29,10 @@ Data of SET50 index future for importing to Amibroker.
 2019-06-25T12:14:00+07:00  Low 1147 -> 1148.5  
 
 **S50U2019**  
-ในราย 1 นาที แท่งแรกสุดที่มีคือ 1 July 2019 แทนที่จะเป็น 27 Jun 2019 (ขาดวันที่ 27 28 ไป 2 วัน)  
-แก้ปัญหาโดยการนำแท่งราย 5 นาที มาใช้แทนในวันที่ 27 - 28 Jun 2019  
+In 1 minute timeframe, the first bar should be _27 Jun 2019_, but I got _1 July 2019_ instead (2 days missed, 27th and 28th).  
+Resolved by using data in 5 minutes timeframe on _27 - 28 Jun 2019_.
 
 **S50H2020**  
-ในราย 1 นาที แท่งแรกสุดที่มีคือ 30 Dec 2019 แทนที่จะเป็น 27 Dec 2019 (ขาดวันที่ 27 ไป 1 วัน)  
-แก้ปัญหาโดยการนำแท่งราย 5 นาที มาใช้แทนในวันที่ 27 Dec 2019  
+In 1 minute timeframe, the first bar should be _27 Dec 2019_, but I got _30 Dec 2019_ instead (1 day missed, 27th).  
+Resolved by using data in 5 minutes timeframe on _27 Dec 2019_.
+  
